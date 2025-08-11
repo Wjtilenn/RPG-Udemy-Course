@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemObject : MonoBehaviour
+{
+    // TODO: ÷ÿ–¥ItemObject
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private ItemData itemData;
+
+    private void OnValidate()
+    {
+        SetupVisuals();
+    }
+
+    private void SetupVisuals()
+    {
+        if (itemData == null)
+        {
+            return;
+        }
+
+        GetComponent<SpriteRenderer>().sprite = itemData.icon;
+        gameObject.name = "item object - " + itemData.name;
+    }
+
+    public void SetupItem(ItemData _itemData, Vector2 _velocity)
+    {
+        itemData = _itemData;
+        rb.velocity = _velocity;
+
+        SetupVisuals();
+    }
+
+    public void PickupItem()
+    {
+        Destroy(gameObject);
+    }
+}

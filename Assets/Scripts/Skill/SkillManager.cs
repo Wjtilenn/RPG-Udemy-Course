@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum SkillType{
+    None,
+    NormalAttack1,
+    NormalAttack2, 
+    NormalAttack3,
+    Throw,
+    Bounce,
+    Pierce,
+    Spin,
+    Crystal,
+    CrystalAegis,
+    MultipleCrystals,
+    Blockhole
+}
+
+public class SkillManager : MonoBehaviour
+{
+    public  static SkillManager instance;
+
+    public NormalAttack_Skill normalAttack {  get; private set; }
+    public Dash_Skill dash { get; private set; }
+    public Clone_Skill clone { get; private set; }
+    public Sword_Skill sword { get; private set; }
+    public Blackhole_Skill blackhole { get; private set; }
+    public Crystal_Skill crystal { get; private set; }
+    public CounterAttack_Skill counterAttack { get; private set; }
+
+    public Ui_GameInerfaceSkillBar[] gameInterfaceSkillBar;
+    [SerializeField] private UI_SkillBar[] skillBar;
+
+    public Ui_GameInerfaceSkillBar ultimateAbility;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(instance.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        normalAttack = GetComponent<NormalAttack_Skill>();
+        dash = GetComponent<Dash_Skill>();
+        clone = GetComponent<Clone_Skill>();
+        sword = GetComponent<Sword_Skill>();
+        blackhole = GetComponent<Blackhole_Skill>();
+        crystal = GetComponent<Crystal_Skill>();
+        counterAttack = GetComponent<CounterAttack_Skill>();
+        
+    }
+
+    public void SkillBarUpdate()
+    {
+        for(int i = 0;i < skillBar.Length;i++)
+        {
+            gameInterfaceSkillBar[i].SkillBarUpdate(skillBar[i]);
+        }
+    }
+
+}
