@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "RPG - Udemy Course.sln"
+    "dotnet.defaultSolution": "RPG-Udemy-Course.sln"
 }
